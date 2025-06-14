@@ -1,105 +1,139 @@
-#Actividad Práctica Pre Evaluación Vida y Salud
-usuario = {}
-opcion = 1
-while opcion == 1:
-    print("Ingrese los datos de la Persona a Registrar: ")
-    usuario["Rut"] = int(input("Ingrese El Rut [sin puntos y con guion]: "))
-    usuario["Nombre"] = str(input("Ingrese el Nombre: "))
-    usuario["Apellido_pat"] = str(input("Ingrese Apellido Paterno"))
-    usuario["Edad"] = int(input("Ingrese la Edad: "))
-    usuario["Estado_civil"] = str(input("Ingrese el Estado Civil [C = Casado, S = Soltero, V = Viudo]: "))
-    usuatio["Genero"] = str(input("Ingrese Genero [Femenino o Masculino]: "))
-    usuario["Fecha_Afiliacion"] = str(input("Ingrese Fecha de Afiliacion [DD/MM/AAAA]: "))
-    print("Persona Registrada Correctamente")
-    break  
-while opcion == 2:
-  print("Buscar Datos de una persona \n")
-  rut= input("Ingrese el rut de la persona para realizar su busqueda de datos:")
-  if rut in usuario:
-    print("Rut Encontrado.")
-    print("Rut: ", usuario[rut]["Rut"])
+while True:
+    print("\n--- MENÚ ISAPRE VIDA Y SALUD ---")
+    print("1. Registrar nuevo afiliado")
+    print("2. Listar todos los afiliados")
+    print("3. Buscar afiliado por RUT")
+    print("4. Modificar datos de un afiliado")
+    print("5. Eliminar afiliado")
+    print("6. Salir")
+    print("7. Imprimir certificado")
+    opcion = input("Seleccione una opción (1-7): ")
 
-
-#Opcion 2: Buscar afiliado por RUT
-print("\n=== BUSCAR AFILIADO ===")
-
-hay_afiliados = False
-for _ in afiliados:
-    hay_afiliados = True
-    break
-
-if not hay_afiliados:
-    print("No hay afiliados registrados en el sistema.")
-else:
-    rut_buscar = input("Ingrese el RUT a buscar (formato 12345678-K)}: ")
-
-    tiene_guion = False
-    pos_guion = 0
-    longitud = 0
-
-    for c in rut_buscar:
-        longitud += 1
-        if c == '-':
-            tiene_guion = True
-            pos_guion = longitud - 1
-
-    es_valido = True
-
-    if not tiene_guion or pos_guion == 0 or pos_guion == longitud - 1:
-        es_valido = False
-    if es_valido:
-        for i in range(pos_guion):
-            c = rut_buscar[i]
-            if not (c >= '0' and c <= '9'):
-                es_valido = False
-                break
-        if es_valido:
-            dv = rut_buscar[pos_guion+1]
-            if not ((dv >= '0' and dv <= '9') or dv == 'k' or dv == 'K'):
-                es_valido = False
-    if not es_valido:
-        print("Error: El RUT ingresado no tiene un formato valido.")
-    else:
-        rut_buscar_mayus = ''
-        for c in rut_buscar:
-            if c >= 'a' and c <= 'z':
-                rut_buscar_mayus += chr(ord-(c) - 32)
-            else:
-                rut_buscar_mayus += c
-        afiliados_encontrado = None
-        for afiliado in afiliados:
-
-            rut_actual = afiliado['rut']
-            if len(rut_actual) != len(rut_buscar_mayus):
-                continue
-            iguales = True
-            for i in range(len(rut_actual)):
-                c1 = rut_actual[i]
-                c2 = rut_buscar_mayus[i]
-
-                if c1 >= 'a' and c1 <= 'z':
-                    c1 = chr(ord(c1) - 32)
-                if c2 >= 'a' and c2 <= 'z':
-                    c2 = chr(ord(c2) - 32) 
-                
-                if c1 != c2:
-                    iguales = False
-                    break
-
-            if iguales:
-                afiliado_encontrado = afiliado
-                break
-        
-        if afiliado_encontrado:
-            print("\nInformación del afiliado:")
-            print("RUT: " + afiliado_encontrado['rut'])
-            print("Nombre: " + afiliado_encontrado['nombre'])
-            print("Apellido Paterno: " + afiliado_encontrado['apellido_paterno'])
-            print("Edad: " + str(afiliado_encontrado['edad']))
-            print("Estado Civil: " + afiliado_encontrado['estado_civil'])
-            print("Género: " + afiliado_encontrado['genero'])
-            print("Fecha de Afiliación: " + afiliado_encontrado['fecha_afiliacion'])
+    if opcion == "1":
+        if contador >= 100:
+            print(" No se pueden agregar más afiliados. Límite alcanzado.")
         else:
-            print("No se encontró ningún afiliado con RUT " + rut_buscar)
-            
+            print("\n--- Registro de nuevo afiliado ---")
+            rut = input("Ingrese RUT: ")
+            nombre = input("Ingrese nombre: ")
+            apellido = input("Ingrese apellido paterno: ")
+            edad = input("Ingrese edad: ")
+            estado_civil = input("Ingrese estado civil: ")
+            genero = input("Ingrese género (M/F/Otro): ")
+            fecha_afiliacion = input("Ingrese fecha de afiliación (DD-MM-YYYY): ")
+
+            afiliado = [rut, nombre, apellido, edad, estado_civil, genero, fecha_afiliacion]
+            afiliados[contador] = afiliado
+            contador = contador + 1
+            print(" Afiliado registrado correctamente.")
+
+    elif opcion == "2":
+        print("\n--- Lista de afiliados ---")
+        if contador == 0:
+            print("No hay afiliados registrados.")
+        else:
+            i = 0
+            while i < contador:
+                a = afiliados[i]
+                print(f"{i + 1}. RUT: {a[0]} | Nombre: {a[1]} {a[2]} | Edad: {a[3]} | Estado Civil: {a[4]} |  Género: {a[5]} | Fecha Afiliación: {a[6]}")
+                i = i + 1
+
+    elif opcion == "3":
+        print("\n*** Buscar afiliado por RUT ***")
+        rut_buscar = input("Ingrese el RUT a buscar: ")
+        encontrado = False
+        i = 0
+        while i < contador:
+            if afiliados[i][0] == rut_buscar:
+                print(f" Afiliado encontrado: {afiliados[i]}")
+                encontrado = True
+            i = i + 1
+        if not encontrado:
+            print(" Afiliado no encontrado.")
+
+    elif opcion == "4":
+        print("\n****** Modificar afiliado *******")
+        rut_modificar = input("Ingrese el RUT del afiliado a modificar: ")
+        encontrado = False
+        i = 0
+        while i < contador:
+            if afiliados[i][0] == rut_modificar:
+                print("Afiliado encontrado. Ingrese nuevos datos   :")
+                nombre = input("Nuevo nombre                       : ")
+                apellido = input("Nuevo apellido paterno           : ")
+                edad = input("Nueva edad                           : ")
+                estado_civil = input("Nuevo estado civil           : ")
+                genero = input("Nuevo género (M/F/Otro)            : ")
+                fecha_afiliacion = input("Nueva fecha de afiliación: ")
+
+                afiliados[i][1] = nombre
+                afiliados[i][2] = apellido
+                afiliados[i][3] = edad
+                afiliados[i][4] = estado_civil
+                afiliados[i][5] = genero
+                afiliados[i][6] = fecha_afiliacion
+
+                print(" Afiliado modificado correctamente.")
+                encontrado = True
+            i = i + 1
+        if not encontrado:
+            print(" Afiliado no encontrado.")
+
+    elif opcion == "5":
+        print("\n***** Eliminar afiliado ******")
+        rut_eliminar = input("Ingrese el RUT del afiliado a eliminar: ")
+        encontrado = False
+        i = 0
+        while i < contador:
+            if afiliados[i][0] == rut_eliminar:
+                g = i
+                while g < contador - 1:
+                    afiliados[g] = afiliados[g + 1]
+                    g = g + 1
+                afiliados[contador - 1] = None
+                contador = contador - 1
+                print(" Afiliado eliminado correctamente.")
+                encontrado = True
+                break
+            i = i + 1
+        if not encontrado:
+            print(" Afiliado no encontrado.")
+
+    elif opcion == "6":
+        print(" Saliendo del programa. ¡Hasta luego!")
+        break
+
+    elif opcion == "7":
+        print("\n******* Imprimir certificado *******")
+        rut_certificado = input("Ingrese el RUT del afiliado para el certificado: ")
+        i = 0
+        encontrado = False
+        while i < contador:
+            if afiliados[i][0] == rut_certificado:
+                certificado_nombre = "Certificado de Afiliación"
+                afiliado = afiliados[i]
+
                 
+                monto = montos[indice_monto]
+                indice_monto = indice_monto + 1
+                if indice_monto >= 10:
+                    indice_monto = 0  
+
+                print("\n************** CERTIFICADO *******************")
+                print("Nombre del Certificado:", certificado_nombre)
+                print("Nombre del Afiliado   :", afiliado[1], afiliado[2])
+                print("RUT                   :", afiliado[0])
+                print("Edad                  :", afiliado[3])
+                print("Estado Civil          :", afiliado[4])
+                print("Género                :", afiliado[5])
+                print("Fecha de Afiliación   :", afiliado[6])
+                print("Costo del Certificado : $", monto)
+                print("*************************************************")
+                encontrado = True
+                break
+            i = i + 1
+        if not encontrado:
+            print(" Afiliado no encontrado.")
+
+    else:
+        print("Opción no válida. Intente nuevamente.")
