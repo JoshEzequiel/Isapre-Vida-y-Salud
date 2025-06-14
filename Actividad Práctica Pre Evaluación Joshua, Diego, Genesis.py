@@ -7,7 +7,6 @@ while True:
     print("5. Eliminar afiliado")
     print("6. Salir")
     print("7. Imprimir certificado")
-
     opcion = input("Seleccione una opción (1-7): ")
 
     if opcion == "1":
