@@ -20,12 +20,6 @@ while opcion == 2:
     print("Rut: ", usuario[rut]["Rut"])
 
 
-
-
-
-
-
-
 #Opcion 2: Buscar afiliado por RUT
 print("\n=== BUSCAR AFILIADO ===")
 
