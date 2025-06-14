@@ -1,7 +1,6 @@
+import random
 afiliados = [None] * 100
 contador = 0
-montos = [1250, 1300, 1100, 1450, 1380, 1200, 1150, 1275, 1325, 1000]
-indice_monto = 0
 
 while True:
     try:
@@ -14,11 +13,12 @@ while True:
         
         try:
             opcion = input("Seleccione una opción (1-4): ")
+            if opcion not in ["1", "2", "3", "4"]:
+                print("¡Error! Opcion no valida.")
+                continue
         except ValueError:
             print("¡Error! Favor seleccione una opción válida (número del 1 al 4).")
             continue 
-        print("---------------------------------------------------------")
-
         if opcion == "1":
             if contador >= 100:
                 print(" No se pueden agregar más afiliados. Límite alcanzado.")
@@ -27,10 +27,10 @@ while True:
                 print("\n********* Registro de nuevo afiliado *********")
                 while True:
                     try:
-                        rut_buscar = input("Ingrese RUT sin puntos y con guion (ej: 12345678-9): ")
+                        rut = input("Ingrese RUT sin puntos y con guion (ej: 12345678-9): ")
                         guion_encontrado = False
                         rut_valido = True
-                        for letra in rut_buscar:
+                        for letra in rut:
                             if letra == "-":
                                 if guion_encontrado:
                                     rut_valido = False
@@ -48,6 +48,11 @@ while True:
                             print("El RUT solo puede contener números y un guion. No se permiten letras ni simbolos.")
                         else:
                             break 
+                        if rut in [afiliados[i][0] for i in range(contador) if afiliados[i] is not None]:
+                            print("Usuario ya Registrado!! Ingrese otro Rut para Registrar!... ")
+                        else:
+                            break    
+                            
                     except ValueError:
                         print("Error de ingreso!!") 
                 while True:
@@ -64,7 +69,7 @@ while True:
                     else:
                         break
                 while True:
-                    apellido = input("Ingrese el nombre: ")
+                    apellido = input("Ingrese el Apellido Paterno: ")
                     tiene_numero = False
                     for letra in apellido:
                         if letra >= "0" and letra <= "9":
@@ -72,7 +77,7 @@ while True:
                             break
                     if tiene_numero:
                         print("El apellido no debe contener números.")
-                    elif nombre == "":
+                    elif apellido == "":
                         print("El apellido no puede estar vacío.")
                     else:
                         break
@@ -195,10 +200,7 @@ while True:
                     if afiliados[i][0] == rut_certificado:
                         certificado_nombre = "Certificado de Afiliación"
                         afiliado = afiliados[i]
-                        monto = montos[indice_monto]
-                        indice_monto = indice_monto + 1
-                        if indice_monto >= 10:
-                            indice_monto = 0  
+                        monto = random.randint(1000, 1500)
 
                         print("\n************** CERTIFICADO *******************")
                         print("Nombre del Certificado:", certificado_nombre)
@@ -231,4 +233,3 @@ while True:
             print("Opción no válida. Intente nuevamente.")
     except Exception as e:
         print("Ocurrió un error:", e)        
-
