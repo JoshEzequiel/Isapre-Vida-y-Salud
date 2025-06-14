@@ -1,8 +1,3 @@
-afiliados = [None] * 100
-contador = 0
-montos = [1250, 1300, 1100, 1450, 1380, 1200, 1150, 1275, 1325, 1000]
-indice_monto = 0  
-
 while True:
     print("\n--- MENÚ ISAPRE VIDA Y SALUD ---")
     print("1. Registrar nuevo afiliado")
