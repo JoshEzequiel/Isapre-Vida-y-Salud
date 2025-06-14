@@ -46,13 +46,10 @@ while True:
                             print("El RUT debe contener un guion (-). Intente nuevamente.")
                         elif not rut_valido:
                             print("El RUT solo puede contener números y un guion. No se permiten letras ni simbolos.")
-                        else:
-                            break 
-                        if rut in [afiliados[i][0] for i in range(contador) if afiliados[i] is not None]:
+                        elif rut in [afiliados[i][0] for i in range(contador) if afiliados[i] is not None]:
                             print("Usuario ya Registrado!! Ingrese otro Rut para Registrar!... ")
                         else:
-                            break    
-                            
+                            break         
                     except ValueError:
                         print("Error de ingreso!!") 
                 while True:
