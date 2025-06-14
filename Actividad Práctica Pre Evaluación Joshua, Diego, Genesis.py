@@ -66,8 +66,16 @@ while True:
                 print("Error: Género debe ser 'Femenino' o 'Masculino'.")
             else:
                 break          
+        while True:
+            try:
+                Fecha_Afiliacion = str(input("Ingrese Fecha de Afiliacion DD/MM/AAAA: "))
+                if "/" not in Fecha_Afiliacion:
+                    print("La Fecha debe estar en formato DD/MM/AAAA")
+                break    
+            except ValueError as e:
+                print("Error:", e)        
+            
 
-        Fecha_Afiliacion = str(input("Ingrese Fecha de Afiliacion DD/MM/AAAA: "))
         usuario[rut] = {"Rut": Rut,
                         "Nombre": Nombre,
                         "Apellido_Paterno": Apellido_pat,
