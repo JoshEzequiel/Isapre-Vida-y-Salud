@@ -19,3 +19,8 @@ while opcion == 2:
     print("Rut Encontrado.")
     print("Rut: ", usuario[rut]["Rut"])
 
+
+
+
+
+
