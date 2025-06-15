@@ -1,20 +1,4 @@
-afiliados = [None] * 100
-contador = 0
-montos = [1250, 1300, 1100, 1450, 1380, 1200, 1150, 1275, 1325, 1000]
-indice_monto = 0
-
-while True:
-    print("\n************** MENÚ ISAPRE VIDA Y SALUD **************")
-    print("1. Registrar nuevo afiliado")
-    print("2. Listar todos los afiliados")
-    print("3. Buscar afiliado por RUT")
-    print("4. Imprimir certificado")
-    print("5. Salir")
-    print("----------------------------------------------------------")
-    
-    opcion = input("Seleccione una opción (1-5): ")
 ******************************************************************************************************************************************************
-
 elif opcion == "4":
         print("\n******* Imprimir certificado *******")
         rut_certificado = input("Ingrese el RUT del afiliado para el certificado: ")
@@ -25,10 +9,7 @@ elif opcion == "4":
                 certificado_nombre = "Certificado de Afiliación"
                 a = afiliados[i]
 
-                monto = montos[indice_monto]
-                indice_monto += 1
-                if indice_monto >= 10:
-                    indice_monto = 0
+                monto = random.randint(1000, 1500)
 
                 print("\n************** CERTIFICADO *******************")
                 print("Nombre del Certificado:", certificado_nombre)
